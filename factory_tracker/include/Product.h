@@ -13,9 +13,7 @@ class Product
 
   public:
     // constructor
-    Product(std::string name, int quantity, double price)
-    {
-    }
+    Product(std::string name, int quantity, double price);
 
     // getters
     std::string_view getName() const;
