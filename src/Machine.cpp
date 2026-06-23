@@ -11,7 +11,8 @@ class Machine
   public:
     // constructor
     Machine(int id, std::string name, std::string type) : m_id{id}, m_name{name}, m_type{type}
-    {}
+    {
+    }
 
     // getters
     int getId() const
@@ -32,5 +33,13 @@ class Machine
     bool getIsRunning() const
     {
         return m_isRunning;
+    }
+
+    void Machine::printInfo() const
+    {
+        std::cout << "ID: " << m_id << '\n'
+                  << "Name: " << m_name << '\n'
+                  << "Type: " << m_type << '\n'
+                  << "Is running: " << m_isRunning << '\n';
     }
 };

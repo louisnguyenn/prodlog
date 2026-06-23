@@ -36,7 +36,7 @@ void printAllProducts(const std::vector<Product> &inventory)
 
 void printAllMachines(const std::vector<Machine> &machines)
 {
-    std::cout << "=== Products (" << machines.size() << ") ===\n";
+    std::cout << "=== Machines (" << machines.size() << ") ===\n";
 
     for (const auto &machine : machines)
     {
@@ -107,7 +107,7 @@ int main()
             addMachine(machines);
             break;
         case 4:
-            printAllProducts(machines);
+            printAllMachines(machines);
             break;
         case 5:
             break;

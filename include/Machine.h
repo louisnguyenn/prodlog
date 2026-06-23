@@ -3,6 +3,7 @@
 #pragma once
 #include <string>
 #include <string_view>
+#include <iostream>
 
 class Machine
 {
@@ -21,6 +22,7 @@ class Machine
     std::string getName() const;
     std::string getType() const;
     bool getIsRunning() const;
+    void printInfo() const;
 };
 
 #endif // MACHINE_H
