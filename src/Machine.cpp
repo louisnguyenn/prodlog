@@ -35,6 +35,12 @@ class Machine
         return m_isRunning;
     }
 
+    // setters
+    bool setIsRunning(bool toggle)
+    {
+        m_isRunning = toggle;
+    }
+
     void Machine::printInfo() const
     {
         std::cout << "ID: " << m_id << '\n'

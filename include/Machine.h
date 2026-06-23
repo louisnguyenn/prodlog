@@ -1,9 +1,9 @@
 #ifndef MACHINE_H
 #define MACHINE_H
 #pragma once
+#include <iostream>
 #include <string>
 #include <string_view>
-#include <iostream>
 
 class Machine
 {
@@ -22,6 +22,7 @@ class Machine
     std::string getName() const;
     std::string getType() const;
     bool getIsRunning() const;
+    bool setIsRunning(bool);
     void printInfo() const;
 };
 

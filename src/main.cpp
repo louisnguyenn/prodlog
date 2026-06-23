@@ -1,6 +1,7 @@
 #include "../include/Machine.h"
 #include "../include/Product.h"
 #include <iostream>
+#include <string.h>
 #include <vector>
 
 void menu()
@@ -84,6 +85,29 @@ void addMachine(std::vector<Machine> &machines)
     std::cout << "Machine added!\n";
 }
 
+void toggleMachine(std::vector<Machine> &machines)
+{
+    std::string name{};
+
+    std::cout << "What machine do you want to toggle?: ";
+    std::cin >> name;
+
+    for (auto &machine : machines)
+    {
+        if (name == machine.getName())
+        {
+            if (machine.getIsRunning() == false)
+            {
+                machine.setIsRunning(true);
+            }
+            else
+            {
+                machine.setIsRunning(false);
+            }
+        }
+    }
+}
+
 int main()
 {
     std::vector<Product> inventory;
@@ -110,8 +134,11 @@ int main()
             printAllMachines(machines);
             break;
         case 5:
+            toggleMachine(machines);
             break;
         case 0:
+            std::cout << "Exiting..." << '\n';
+            return 0;
             break;
         }
 
