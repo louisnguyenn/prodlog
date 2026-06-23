@@ -21,6 +21,7 @@ int getChoice()
     int input{};
 
     std::cin >> input;
+    std::cout << '\n';
 
     return input;
 }

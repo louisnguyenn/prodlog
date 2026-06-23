@@ -19,10 +19,10 @@ class Machine
 
     // getters
     int getId() const;
-    std::string getName() const;
-    std::string getType() const;
+    std::string_view getName() const;
+    std::string_view getType() const;
     bool getIsRunning() const;
-    bool setIsRunning(bool);
+    void setIsRunning(bool);
     void printInfo() const;
 };
 
