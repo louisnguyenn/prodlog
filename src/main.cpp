@@ -1,9 +1,9 @@
 #include "../include/Machine.h"
 #include "../include/Product.h"
+#include <fstream>
 #include <iostream>
 #include <string.h>
 #include <vector>
-#include <fstream>
 
 void menu()
 {
@@ -112,9 +112,10 @@ void toggleMachine(std::vector<Machine> &machines)
     }
 }
 
-void saveToFile(const std::vector<Product> &inventory, const std::vector<Machine> &machines, const std::string &filename)
+void saveToFile(const std::vector<Product> &inventory, const std::vector<Machine> &machines,
+                const std::string &filename)
 {
-    std::ofstream file(filename);
+    std::ofstream file(filename); // write to file
 
     if (!file.is_open())
     {
@@ -137,13 +138,66 @@ void saveToFile(const std::vector<Product> &inventory, const std::vector<Machine
     // writing machines
     for (const auto &machine : machines)
     {
-        file << machine.getId() << '\n' << machine.getName() << '\n' << machine.getType() << '\n' << machine.getIsRunning() << '\n';
+        file << machine.getId() << '\n'
+             << machine.getName() << '\n'
+             << machine.getType() << '\n'
+             << machine.getIsRunning() << '\n';
     }
     std::cout << "Saved " << machines.size() << " machines";
 }
 
-void loadFromFile()
+void loadFromFile(std::vector<Product> &inventory, std::vector<Machine> &machines, const std::string &filename)
 {
+    std::ifstream file(filename); // read from file
+    int count{};
+
+    if (!file.is_open())
+    {
+        std::cout << "No save file found. Creating file...\n";
+        return;
+    }
+
+    // load products
+    file >> count;
+    file.ignore();
+
+    for (int i{0}; i < count; ++i)
+    {
+        std::string name{};
+        int quantity{};
+        double price{};
+
+        std::getline(file, name);
+        file >> quantity;
+        file >> price;
+        file.ignore();
+
+        inventory.push_back(Product(name, quantity, price));
+    }
+    std::cout << "Loaded " << count << " products\n";
+
+    // load machines
+    file >> count;
+    file.ignore();
+
+    for (int i{0}; i < count; ++i)
+    {
+        int id{};
+        std::string name{};
+        std::string type{};
+        bool isRunning{};
+
+        file >> id;
+        std::getline(file, name);
+        std::getline(file, type);
+        file >> isRunning;
+        file.ignore();
+
+        Machine m(id, name, type);
+        m.setIsRunning(isRunning);
+        machines.push_back(m);
+    }
+    std::cout << "Loaded " << count << " machines\n";
 }
 
 int main()
@@ -175,10 +229,10 @@ int main()
             toggleMachine(machines);
             break;
         case 6:
-            saveToFile(inventory, machinesm "data.txt");
+            saveToFile(inventory, machines, "data.txt");
             break;
         case 7:
-            loadFromFile();
+            loadFromFile(inventory, machines, "data.txt");
             break;
         case 0:
             std::cout << "Exiting..." << '\n';
