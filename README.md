@@ -2,23 +2,23 @@
 
 > A command-line factory production tracking system built in C++.
 
-Prodlog simulates the core data management layer of a manufacturing execution system (MES) — the kind of software that runs on real factory floors. It lets operators log machine activity, track inventory, and generate production reports entirely from the terminal.
+Prodlog simulates the core data management layer of a manufacturing execution system (MES), the kind of software that runs on real factory floors. It lets operators log machine activity, track inventory, and generate production reports entirely from the terminal.
 
 ---
 
 ## Features
 
-- **Product inventory** — add, list, and search products by name, quantity, and unit price
-- **Machine registry** — register machines by type (lathe, mill, press) and toggle them on/off
-- **Production logging** — record which machine produced what, and how many units
-- **Summary reports** — total units produced, revenue, and per-machine output history
-- **Data persistence** — all inventory and logs are saved to disk and reloaded automatically on startup
+- **Product inventory** - add, list, and search products by name, quantity, and unit price
+- **Machine registry** - register machines by type (lathe, mill, press) and toggle them on/off
+- **Production logging** - record which machine produced what, and how many units
+- **Summary reports** - total units produced, revenue, and per-machine output history
+- **Data persistence** - all inventory and logs are saved to disk and reloaded automatically on startup
 
 ---
 
 ## Why I Built This
 
-Small and mid-size manufacturers lose hours every week to paper logs and spreadsheets. Prodlog is a ground-up implementation of the core logic behind industrial MES software — machine accountability, inventory tracking, and production traceability — using only C++ and the standard library.
+Small and mid-size manufacturers lose hours every week to paper logs and spreadsheets. Prodlog is a ground-up implementation of the core logic behind industrial MES software, machine accountability, inventory tracking, and production traceability; using only C++ and the standard library.
 
 It targets the same problem space as systems like SAP and Ignition, at a scale that makes the underlying design decisions visible and understandable.
 
