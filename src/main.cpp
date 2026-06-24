@@ -284,11 +284,5 @@ int main()
 
     } while (choice != 0);
 
-    // inventory.push_back(Product("Steel Bolt M*", 500, 0.15));
-    // inventory.push_back(Product("Aluminium Plate", 30, 12.50));
-    // inventory.push_back(Product("Drive Belt", 20, 8.00));
-
-    // printAllProducts(inventory);
-
     return 0;
 }
