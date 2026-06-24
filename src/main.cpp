@@ -3,6 +3,7 @@
 #include <iostream>
 #include <string.h>
 #include <vector>
+#include <fstream>
 
 void menu()
 {
@@ -12,6 +13,8 @@ void menu()
               << "3. Add machine\n"
               << "4. List machines\n"
               << "5. Toggle machine on/off\n"
+              << "6. Save all data\n"
+              << "7. Load data\n"
               << "0. Exit\n"
               << "Choice: ";
 }
@@ -109,6 +112,40 @@ void toggleMachine(std::vector<Machine> &machines)
     }
 }
 
+void saveToFile(const std::vector<Product> &inventory, const std::vector<Machine> &machines, const std::string &filename)
+{
+    std::ofstream file(filename);
+
+    if (!file.is_open())
+    {
+        std::cerr << "Error: could not open " << filename << '\n';
+        return;
+    }
+
+    // write count to file so we know how much to read
+    file << inventory.size() << '\n';
+
+    // writing products
+    for (const auto &product : inventory)
+    {
+        file << product.getName() << '\n' << product.getQuantity() << '\n' << product.getPrice() << '\n';
+    }
+    std::cout << "Saved " << inventory.size() << " products";
+
+    file << machines.size() << '\n';
+
+    // writing machines
+    for (const auto &machine : machines)
+    {
+        file << machine.getId() << '\n' << machine.getName() << '\n' << machine.getType() << '\n' << machine.getIsRunning() << '\n';
+    }
+    std::cout << "Saved " << machines.size() << " machines";
+}
+
+void loadFromFile()
+{
+}
+
 int main()
 {
     std::vector<Product> inventory;
@@ -136,6 +173,12 @@ int main()
             break;
         case 5:
             toggleMachine(machines);
+            break;
+        case 6:
+            saveToFile(inventory, machinesm "data.txt");
+            break;
+        case 7:
+            loadFromFile();
             break;
         case 0:
             std::cout << "Exiting..." << '\n';
