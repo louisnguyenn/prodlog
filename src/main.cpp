@@ -1,7 +1,9 @@
 #include "../include/Machine.h"
 #include "../include/Product.h"
+#include "../include/ProductionLog.h"
 #include <fstream>
 #include <iostream>
+#include <numeric>
 #include <string.h>
 #include <vector>
 
@@ -15,6 +17,7 @@ void menu()
               << "5. Toggle machine on/off\n"
               << "6. Save all data\n"
               << "7. Load data\n"
+              << "8. Add logs\n"
               << "0. Exit\n"
               << "Choice: ";
 }
@@ -200,10 +203,45 @@ void loadFromFile(std::vector<Product> &inventory, std::vector<Machine> &machine
     std::cout << "Loaded " << count << " machines\n";
 }
 
+void logProduction(std::vector<ProductionLog> &logs)
+{
+    int machineId{};
+    std::string productName{};
+    int quantity{};
+    std::string date{};
+
+    std::cout << "Machine ID: ";
+    std::cin >> machineId;
+
+    std::cout << "Product name: ";
+    std::cin >> productName;
+
+    std::cout << "Quantity produced: ";
+    std::cin >> quantity;
+
+    std::cout << "Date (YYYY-MM-DD): ";
+    std::cin >> date;
+
+    logs.push_back({machineId, productName, quantity, date});
+    std::cout << "Log entry added!\n";
+}
+
+void printSummaryReport(const std::vector<Product> &inventory, const std::vector<Machine> &machines,
+                        const std::vector<ProductionLog> &logs)
+{
+    std::cout << "\n======= PRODUCTION SUMMARY =======\n";
+
+    int totalUnits = std::accumulate(logs.begin(), logs.end(), 0,
+                                     [](int sum, const ProductionLog &log) { return sum + log.quantityProduced; });
+
+    std::cout << "Total units produced: " << totalUnits << '\n';
+}
+
 int main()
 {
     std::vector<Product> inventory;
     std::vector<Machine> machines;
+    std::vector<ProductionLog> logs;
     int choice{};
 
     do
@@ -234,7 +272,11 @@ int main()
         case 7:
             loadFromFile(inventory, machines, "data.txt");
             break;
+        case 8:
+            logProduction(logs);
+            break;
         case 0:
+            printSummaryReport(inventory, machines, logs);
             std::cout << "Exiting..." << '\n';
             return 0;
             break;
