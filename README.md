@@ -46,7 +46,7 @@ It targets the same problem space as systems like SAP and Ignition, at a scale t
 ### Build
 
 ```bash
-git clone https://github.com/yourusername/prodlog.git
+git clone https://github.com/louisnguyenn/prodlog.git
 cd prodlog
 mkdir build && cd build
 cmake ..
